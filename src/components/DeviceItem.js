@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, Col, Image } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { DEVICE_ROUTE } from '../utils/consts';
+import littleStar from '../assets/littleStar.png';
 
 const DeviceItem = observer(({device}) => {
     const history = useHistory();
@@ -20,11 +21,11 @@ const DeviceItem = observer(({device}) => {
                 height={150}
                 src={device.img}
             />
-            <div className="text-black-50 d-flex justify-content-between align-items-center">
+            <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                 <div>Samsung...</div>
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center">
                     <div>{device.rating}</div>
-                    <div style={{fontSize: 20}}>&#9734;</div>
+                    <Image width={18} height={18} src={littleStar} />
                 </div>
             </div>
             <div>{device.name}</div>

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Container, Form, Button, Row } from 'react-bootstrap';
 import { NavLink, useLocation } from 'react-router-dom';
+import { login, registration } from '../dal/userAPI';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
 
 const Auth = () => {
     const location = useLocation();
     const isLogin = location.pathname === LOGIN_ROUTE;
+    const [email, setEmail] = useState()
+
+    const click = async () => {
+        if (isLogin) {
+            const response = await login();
+        } else {
+            const response = await registration();
+            console.log(response);
+        }
+    };
 
     return <Container 
         className="d-flex justify-content-center align-items-center"
@@ -36,6 +47,7 @@ const Auth = () => {
                     }
                     <Button 
                         variant="outline-success"
+                        onClick={}
                     >
                         {isLogin ? 'Enter' : 'Registrate me'}
                     </Button>

@@ -4,6 +4,13 @@ import bigStar from '../assets/bigStar.png';
 
 const DevicePage = () => {
     const device = {id: 1, name: 'Iphone 12 pro', price: 100000, rating: 5, img:`https: //www.purposechurch.com/wp-cont`};
+    const description = [
+        {id: 1, title: 'Оперативная память', description: '5 Гб'},
+        {id: 2, title: 'Камера', description: '12 мп'},
+        {id: 3, title: 'Процессор', description: 'Пентиум 3'},
+        {id: 4, title: 'Кол-во ядер', description: '2'},
+        {id: 5, title: 'Аккумулятор', description: '4000'}
+    ];
 
     return <Container className="mt-3">
         <Row>
@@ -29,6 +36,14 @@ const DevicePage = () => {
                     <Button variant={'outline-dark'}>Add to cart</Button>
                 </Card>
             </Col>
+        </Row>
+        <Row className="d-flex flex-column m-3">
+            <h1>Characteristics</h1>
+            {description.map((info, index) => 
+                <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}>
+                    {info.title}: {info.description}
+                </Row>
+            )}
         </Row>
     </Container>
 };
