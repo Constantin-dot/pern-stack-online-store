@@ -2,31 +2,14 @@ import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
     constructor() {
-        this._types = [
-            {id: 1, name: 'Холодильники'},
-            {id: 2, name: 'Смартфоны'},
-            {id: 3, name: 'Пылесосы'},
-            {id: 4, name: 'Самокаты'},
-            {id: 5, name: 'Ноутбуки'}
-        ];
-        this._brands = [
-            {id: 1, name: 'Samsung'},
-            {id: 2, name: 'Apple'},
-            {id: 3, name: 'LG'},
-            {id: 4, name: 'Lenovo'},
-            {id: 5, name: 'Siemens'},
-            {id: 6, name: 'Xioamy'}
-        ];
-        this._devices = [
-            {id: 1, name: 'Iphone 12 pro', price: 100000, rating: 5},
-            {id: 2, name: 'Iphone X', price: 100000, rating: 5},
-            {id: 3, name: 'Macbook air', price: 100000, rating: 5},
-            {id: 4, name: 'Macbook pro', price: 100000, rating: 5},
-            {id: 5, name: 'Galaxy Note 10', price: 100000, rating: 5},
-            {id: 6, name: 'Galaxy Note 20', price: 100000, rating: 5}
-        ];
+        this._types = [];
+        this._brands = [];
+        this._devices = [];
         this._selectedType = {};
         this._selectedBrand = {};
+        this._page = 1;
+        this._totalCount = 0;
+        this._limit = 3;
         makeAutoObservable(this);
     }
 
@@ -43,11 +26,25 @@ export default class DeviceStore {
     }
 
     setSelectedType(type) {
+        this.setPage(1);
         this._selectedType = type;
     }
 
     setSelectedBrand(brand) {
+        this.setPage(1);
         this._selectedBrand = brand;
+    }
+
+    setPage(page) {
+        this._page = page;
+    }
+
+    setTotalCount(totalCount) {
+        this._totalCount = totalCount;
+    }
+
+    setLimit(limit) {
+        this._limit = limit;
     }
 
     get types() {
@@ -68,5 +65,17 @@ export default class DeviceStore {
 
     get selectedBrand() {
         return this._selectedBrand;
+    }
+
+    get page() {
+        return this._page;
+    }
+
+    get totalCount() {
+        return this._totalCount;
+    }
+
+    get limit() {
+        return this._limit;
     }
 }
