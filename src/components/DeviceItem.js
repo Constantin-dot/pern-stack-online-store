@@ -21,7 +21,10 @@ const DeviceItem = observer(({ device }) => {
                     src={REACT_APP_API_URL + device.img}
                 />
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
-                    <div>Samsung...</div>
+                    {/* <div>
+                        `${type.name} ${brand.name}`
+                    </div> */}
+
                     <div className="d-flex align-items-center">
                         <div>{device.rating}</div>
                         <Image width={18} height={18} src={littleStar} />

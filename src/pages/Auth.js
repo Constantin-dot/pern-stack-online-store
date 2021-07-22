@@ -5,6 +5,7 @@ import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { login, registration } from "../services/userAPI";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { Context } from "../index";
+import InfoAlert from "../components/InfoAlert";
 
 const Auth = observer(() => {
     const { user } = useContext(Context);
@@ -16,19 +17,33 @@ const Auth = observer(() => {
 
     const click = async () => {
         try {
-            let data;
             if (isLogin) {
-                data = await login(email, password);
+                await login(email, password);
             } else {
-                data = await registration(email, password);
+                await registration(email, password);
             }
             user.setUser(user);
             user.setIsAuth(true);
             history.push(SHOP_ROUTE);
         } catch (e) {
-            alert(e.response.data.message);
+            user.setErrorText(e.response.data.message);
+            // alert(e.response.data.message);
         }
     };
+
+    const closeAlert = () => {
+        user.setErrorText("");
+    };
+
+    if (user.errorText.length > 1) {
+        return (
+            <InfoAlert
+                variant={"danger"}
+                onClose={closeAlert}
+                text={user.errorText}
+            />
+        );
+    }
 
     return (
         <Container

@@ -19,6 +19,7 @@ const CreateDevice = observer(({ show, onHide }) => {
     useEffect(() => {
         fetchTypes().then((data) => device.setTypes(data));
         fetchBrands().then((data) => device.setBrands(data));
+        // eslint-disable-next-line
     }, []);
 
     const addInfo = () => {
@@ -43,7 +44,9 @@ const CreateDevice = observer(({ show, onHide }) => {
         formData.append("name", name);
         formData.append("price", `${price}`);
         formData.append("img", file);
+        formData.append("brand", device.selectedBrand.name);
         formData.append("brandId", device.selectedBrand.id);
+        formData.append("type", device.selectedType.name);
         formData.append("typeId", device.selectedType.id);
         formData.append("info", JSON.stringify(info));
         createDevice(formData).then((data) => onHide());

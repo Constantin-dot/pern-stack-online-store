@@ -10,12 +10,18 @@ import { observer } from "mobx-react-lite";
 import { useHistory } from "react-router-dom";
 
 const NavBar = observer(() => {
-    const { user } = useContext(Context);
+    const { user, device } = useContext(Context);
     const history = useHistory();
 
     const logOut = () => {
         user.setUser({});
         user.setIsAuth(false);
+    };
+
+    const onLogoClickHandler = () => {
+        device.setPage(1);
+        device.setSelectedType({});
+        device.setSelectedBrand({});
     };
 
     return (
@@ -24,8 +30,9 @@ const NavBar = observer(() => {
                 <NavLink
                     style={{ color: "white", textDecoration: "none" }}
                     to={SHOP_ROUTE}
+                    onClick={onLogoClickHandler}
                 >
-                    BuyDevice
+                    <h3>BuyDevice</h3>
                 </NavLink>
                 {user.isAuth ? (
                     <Nav className="ml-auto" style={{ color: "white" }}>

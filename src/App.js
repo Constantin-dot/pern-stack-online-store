@@ -13,15 +13,27 @@ const App = observer(() => {
 
     useEffect(() => {
         check()
-            .then((data) => {
+            .then(() => {
                 user.setUser(true);
                 user.setIsAuth(true);
             })
             .finally(() => setLoading(false));
+        // eslint-disable-next-line
     }, []);
 
     if (loading) {
-        return <Spinner animation={"grow"} />;
+        return (
+            <div
+                style={{
+                    height: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <Spinner animation="border" variant="secondary" />
+            </div>
+        );
     }
 
     return (

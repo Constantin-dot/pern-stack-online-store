@@ -11,6 +11,7 @@ const DevicePage = () => {
 
     useEffect(() => {
         fetchOneDevice(id).then((data) => setDevice(data));
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -25,6 +26,7 @@ const DevicePage = () => {
                 </Col>
                 <Col md={4}>
                     <Row className="d-flex flex-column align-items-center">
+                        <b>{device.brand}</b>
                         <h2>{device.name}</h2>
                         <div
                             className="d-flex justify-content-center align-items-center"
